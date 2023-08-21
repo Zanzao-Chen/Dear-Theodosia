@@ -1,0 +1,16 @@
+{
+  "name": "dear-theodosia",
+  "version": "1.0.0",
+  "description": "A online buzzer system for Quizbowl Frontend: HTML, CSS, and Javascript Backend: Python, Flask, socket.io Database: MySQL",
+  "main": "script.js",
+  "scripts": {
+    "test": "dear-theodosia"
+  },
+  "author": "Dear Theodosia",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2",
+    "mysql": "^2.18.1"
+  }
+}

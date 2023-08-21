@@ -1,0 +1,39 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="basic.css">
+    <title>Parenting Style Quiz</title>
+</head>
+<body>
+    <header>
+        <h1>Parenting Style Quiz</h1>
+    </header>
+    
+    <main>
+        <div id="quiz">
+            <div class="introduction">
+                <p>This quiz will help you discover which of the four parenting styles you belong to: authoritative, authoritarian, permissive, or uninvolved. Let's get started! You can learn about our methodology and the theory behind parenting styles <a href= "information.html">here</a>.</p>
+            </div>
+            <form id="parentingQuiz">
+                <!-- Questions from script.js -->
+            </form>
+            
+            <button id="submitBtn">Submit</button>
+            <a href="/"><button id="mainMenuBtn">Main Menu</button></a>
+            <p id="result"></p>
+            <button id="submitAnywayBtn" style="display: none;">Submit anyway with default answers</button>
+        </div>
+        <div id="unansweredLinks"></div>
+        <div id="graphContainer">
+            <canvas id="parentingChart" width="400" height="400"></canvas>
+        </div>
+        <button id="resetQuizBtn" class="reset-button">Reset Quiz</button>
+    </main>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/1.4.0/chartjs-plugin-annotation.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
