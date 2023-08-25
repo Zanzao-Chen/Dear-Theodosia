@@ -264,6 +264,7 @@ submitBtn.addEventListener("click", async (e) => {
     let totalResponsiveness = 0;
     let totalDemandingness = 0;
     unansweredQuestions = [];
+    result.style.display = 'none';
 
     for (let i = 0; i < questions.length; i++) {
         const selectedOption = parentingQuiz.elements[`q${i}`].value;
@@ -271,7 +272,7 @@ submitBtn.addEventListener("click", async (e) => {
         if (selectedOption === "" || selectedOption === null || selectedOption === undefined) {
             unansweredQuestions.push(i + 1);
         } else {
-            const optionValue = parseInt(selectedOption);
+            const optionValue = 7 - parseInt(selectedOption); // score of 6 for strongly agree, score of 1 for strongly disagree
             if (questions[i].label === "Responsiveness") {
                 totalResponsiveness += optionValue;
             } else if (questions[i].label === "Demandingness") {
@@ -290,37 +291,7 @@ submitBtn.addEventListener("click", async (e) => {
         document.getElementById("graphContainer").style.display = "none";
 
     } else {
-        let parentingStyle = "";
-        let parentingMessage = "";
-        if (totalResponsiveness >= 35 && totalDemandingness >= 35) {
-            parentingStyle = "Authoritative (High Demandingness & High Responsiveness).";
-            parentingMessage = " Authoritative parents are assertive and supportive. They set clear expectations for behavior and hold their child accountable, but they also take the time to explain their reasoning and listen to their child's perspective. Authoritative parenting is a balanced approach - it provides structure and rules while encouraging independence and open communication. Most psychological research on parenting styles indicate that, in general, authoritative parenting is associated with the most favorable outcomes for children."
-        } else if (totalResponsiveness < 35 && totalDemandingness >= 35) {
-            parentingStyle = "Authoritarian (High Demandingness & Low Responsiveness).";
-            parentingMessage = "Authoritarian parents believe in strict rules and discipline. They expect their child to obey their commands without question and enforce consequences for any deviation. Authoritarian parenting is focused on maintaining control and order, often without much room for discussion or negotiation. Despite good intentions, such an approach can sometimes lead to a lack of open communication and understanding with their child."
-        } else if (totalResponsiveness >= 35 && totalDemandingness < 35) {
-            parentingStyle = "Permissive (Low Demandingness & High Responsiveness).";
-            parentingMessage = "Permissive parents are lenient and indulgent. They tend to avoid setting firm boundaries and rules, allowing their child considerable freedom to make their own decisions. They're more of a friend than an authority figure, often prioritizing their child's immediate happiness over long-term development. While such a nurturing attitude can create a positive and relaxed environment, it may also result in their child struggling with self-discipline and responsibility."
-        } else if (totalResponsiveness < 35 && totalDemandingness < 35) {
-            parentingStyle = "Uninvolved (Low Demandingness & Low Responsiveness).";
-            parentingMessage = "Uninvolved parents are distant and detached. Their level of engagement in their child's life is minimal, and they may prioritize their own interests and responsibilities over their children's needs. Their lack of emotional involvement and guidance can lead to feelings of neglect for their child. While uninvolved parents may encourage self-reliance and independence, their child might miss out on essential emotional support and guidance needed for healthy development."
-        }
-        const message = `
-            <p>Total Responsiveness Score: ${totalResponsiveness} (Range: 10-70)</p>
-            <p>Total Demandingness Score: ${totalDemandingness} (Range: 10-70)</p>
-            <p>Parenting Style: ${parentingStyle}</p>
-            <p>${parentingMessage}</p>
-            <p>With that said, every child is different, and their individual personalities, needs, and circumstances play a significant role in determining which is the best parenting style for them. Ultimately, a successful parent-child relationship is built on open comunication and a willingness to adjust along the way.</p>
-        `;
-        result.innerHTML = message;
-        updateChart(totalResponsiveness, totalDemandingness);
-        document.getElementById("graphContainer").style.display = "block";
-        const responsePayload = {
-            totalResponsiveness,
-            totalDemandingness,
-            parentingStyle
-        };
-        const consentResponse = parentingQuiz.elements[`q${questions.length}`].value;
+        submitAnyway();
         if (consentResponse === "Yes") {
             try {
                 const response = await fetch('/store-response', {
@@ -360,7 +331,7 @@ submitBtn.addEventListener("click", async (e) => {
         for (let i = 0; i < questions.length; i++) {
             const selectedOption = parentingQuiz.elements[`q${i}`].value;
     
-            const optionValue = selectedOption === "" ? 3.5 : parseInt(selectedOption);
+            const optionValue = selectedOption === "" ? 3.5 : 7 - parseInt(selectedOption);
     
             if (questions[i].label === "Responsiveness") {
                 totalResponsiveness += optionValue;
@@ -393,6 +364,7 @@ submitBtn.addEventListener("click", async (e) => {
         `;
     
         result.innerHTML = message;
+        result.style.display = 'block';
         updateChart(totalResponsiveness, totalDemandingness);
         document.getElementById("graphContainer").style.display = "block";
     }
@@ -415,8 +387,8 @@ function updateChart(responsiveness, demandingness) {
                 backgroundColor: 'rgba(75, 192, 192, 0.6)',
                 borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 1,
-                pointRadius: 8,
-                pointHoverRadius: 10,
+                pointRadius: 6,
+                pointHoverRadius: 7.5,
             }]
         },
         options: {
@@ -539,7 +511,7 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
         quizForm.appendChild(questionDiv);
         const resetQuizBtn = document.getElementById("resetQuizBtn");
-        resetQuizBtn.addEventListener("click", () => {d
+        resetQuizBtn.addEventListener("click", () => {
             location.reload();
         });
     });
