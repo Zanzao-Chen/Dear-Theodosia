@@ -9,6 +9,7 @@ The results were published in Harvard's Young Scholars Academic Journal (https:/
 <img width="800" alt="image" src="https://github.com/Zanzao-Chen/Dear-Theodosia/assets/131998534/fe4eb398-5250-4940-813a-1f0122017cc3">    
 <br>
 <img width="800" alt="image" src="https://github.com/Zanzao-Chen/Dear-Theodosia/assets/131998534/705d0d56-452b-4351-90d5-4514f46f76b0">
-
+<br>
+<img width="373" alt="image" src="https://github.com/Zanzao-Chen/Dear-Theodosia/assets/131998534/e548391f-f910-4c02-84c9-daf33ee2a26a">
 
 
